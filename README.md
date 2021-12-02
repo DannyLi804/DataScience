@@ -9,3 +9,7 @@ The budget of each manufacturer has a direct correlation to success within Formu
 
 #### This graph shows the CO2 Emissions in New York by Year.
 ![graph](NYCO2Emission.png)
+
+#### This graph shows the Average CO2 Emissions by Sector in the last 40 years.
+![graph](AverageCO2EmissionsbySector.png)
+
