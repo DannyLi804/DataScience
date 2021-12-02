@@ -13,3 +13,6 @@ The budget of each manufacturer has a direct correlation to success within Formu
 #### This graph shows the Average CO2 Emissions by Sector in the last 40 years.
 ![graph](AverageCO2EmissionsbySector.png)
 
+#### This graph shows the Percentage of each sector contributing to the overall CO2 Emission by year.
+![graph](CO2EmissionbySector.png)
+
