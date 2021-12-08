@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def result():
+def CleanF1result():
     df=pd.read_csv('results.csv')
     df1=df[df['position']=='1']
     df2=df[df['position']=='2']
@@ -11,7 +11,7 @@ def result():
     newdf=pd.concat([df1,df2,df3,df4,df5])
     newdf=newdf.sort_values(by='resultId')
     newdf.to_csv('result1-2.csv',index=False,columns=['resultId','raceId','constructorId','position'])
-def merge():
+def mergeF1():
     df=pd.read_csv('result1-2.csv')
     
     df1=pd.read_csv('races.csv')
@@ -23,7 +23,7 @@ def merge():
     newdf=pd.merge(df,df1,on='raceId',how='left')
     lastdf=pd.merge(newdf,df2,on='constructorId',how='left')
     lastdf.to_csv('finishingdata.csv',index=False)
-def nycgraph():
+def nycgraphCO2Emission():
     df=pd.read_csv('newyorkCO2emission.csv')
     df=df[df['Sector']=='Fuel Totals']
     year=[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]
@@ -41,7 +41,8 @@ def nycgraph():
     plt.ylabel('CO2 Emission(million metric tons)')
     plt.legend()
     plt.show()
-def piechart():
+def piechartCO2BySector():
+    
     total=[224.2,207,196.9,179.2,183.9,188.5,191.6,202,209.5,214.5,208.2,200.5,199,194.2,192.2,197.8,200.5,204.9,203.4,205.2,211.7,205.9,200.3,211,213.3,209.6,191.1,197.7,187.8,172.1,185.7,175.7,168,170,177.8,175.6,171,166.9,175.9]
     transport=[71.7,67.2,60.1,54.2,49.3,58,59.2,62.5,59.7,59.9,63.8,62.3,60.8,61.7,60.6,62.4,65.7,65.6,66,66.5,66.9,66.7,68.4,73.2,74.9,73.2,74.2,73.6,73,71,82.6,77.3,75.6,76.4,80.9,79.1,82.3,82.9,83.3]
     industrial=[34.4,29.3,25.6,19.8,22.6,21.4,18.6,19.6,19.9,20.4,19.1,18.5,19.3,20,20.3,22.2,22.8,22,20.6,16.3,16.5,14.2,12.8,12.5,11.9,12.4,11.7,11.3,10.6,8.7,9.2,9.4,9,9.2,9,9.1,8.5,8.5,8.6]
@@ -66,24 +67,76 @@ def piechart():
     plt.legend()
     plt.show()
 
-def cleandata():
-    return 1
-    """
     y=[]
     y.append(round(sum(transport)/len(transport),2))
     y.append(round(sum(industrial)/len(industrial),2))
     y.append(round(sum(commercial)/len(commercial),2))
     y.append(round(sum(resident)/len(resident),2))
     y.append(round(sum(electric)/len(electric),2))
-    print(y)
     mylabel=['Transportation','Industrial','Commerical','Residential', 'Electrical']
     myexplode=[0.1,0,0,0,0]
     plt.pie(y,labels=mylabel,explode=myexplode,autopct='%1.1f%%',shadow=True)
     plt.title('Average CO2 Emission by Sector')
     plt.legend()
     plt.show()
-    """
-piechart()
-#nycgraph()
-#result()
-#merge()
+    
+def cleanMPG():
+    count=2022
+    while count>1997:
+        if count>2009:
+           
+            df=pd.read_excel(str(count)+'.xlsx', index_col=0)
+            
+                
+            try:
+                groupdf=df.groupby(['Mfr Name']).mean()
+                groupdf=groupdf.reset_index()
+            except:
+                groupdf=df.groupby(['Mfr Name ']).mean()
+                groupdf=groupdf.reset_index()
+                groupdf=groupdf.rename(columns={'Mfr Name ':'Mfr Name'})
+            groupdf['Year']=str(count)
+            try:
+                groupdf=groupdf[['Year','Mfr Name','Comb FE (Guide) - Conventional Fuel','Comb CO2 Rounded Adjusted (as shown on FE Label)']]
+            except:
+                groupdf=groupdf[['Year','Mfr Name','Comb FE (Guide) - Conventional Fuel']]
+            groupdf.to_csv(str(count)+'.csv',index=False)
+            count=count-1
+        elif count==2008 or count<=2006 and count>=2003 or count<=1999:
+            df=pd.read_csv(str(count)+'.csv',error_bad_lines=False)
+            try:
+                groupdf=df.groupby(['MFR']).mean()
+            except:
+                groupdf=df.groupby(['Manufacturer']).mean()
+            groupdf['Year']=str(count)
+            groupdf=groupdf.reset_index()
+            try:
+                groupdf=groupdf[['Year','MFR','COMB MPG (GUIDE)']]
+            except:
+                groupdf=groupdf[['Year','Manufacturer','cmb']]
+            groupdf.to_csv(str(count)+'.csv',index=False)
+            count=count-1    
+        
+        else:
+            df=pd.read_excel(str(count)+'.xls')
+            try:
+                groupdf=df.groupby(['MFR']).mean()
+            except:
+                groupdf=df.groupby(['Manufacturer']).mean()
+            groupdf['Year']=str(count)
+            groupdf=groupdf.reset_index()
+            try:
+                groupdf=groupdf[['Year','MFR','COMB MPG (GUIDE)']]
+            except:
+                groupdf=groupdf[['Year','Manufacturer','cmb']]
+            groupdf.to_csv(str(count)+'.csv',index=False)
+            count=count-1
+            #COMB MPG (GUIDE)
+    
+   
+
+cleanMPG()
+#piechartCO2BySector()
+#nycgraphCO2Emission()
+#CleanF1result()()
+#mergeF1()
