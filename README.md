@@ -4,7 +4,7 @@ Formula 1 is said to be the highest class of international racing for single-sea
 The main focus of my project is to see if advancements made in Formula 1 by different manufacturers are reflected in consumer-grade cars made by the same manufacturers. Our goal is to see if there is a correlation between Formula 1 budget cost to fuel efficieny in Formula 1 vehicles and observe if there is a trickle-down effect on to consumer-grade motor vehicles fuel efficiency and the effect this has on CO2 emissions. 
 In order for us to see if F1 Research has an impact on Consumer-Grade motor vehicles, we have to examine the impact F1 research has on F1 Performance. Then we can see the standings for each year of F1 Racing and compare it to consumer-grade vehicles produced by the same manufacturers that compete in F1 and are placed within the top 5 for each year.
 ## Data
-#### This graph shows the budget spent by different manufacture from 1999-2014.
+#### This graph shows the budget spent by different manufacturers from 1999-2014.
 ###### Green=winner
 ![graph](BudgetvsSuccess.png)
 ###### Source: f1metrics        
