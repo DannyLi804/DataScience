@@ -1,5 +1,17 @@
+"""
+Name: Danny Li
+
+Title: Does F1 Research Trickle Down to Consumer-Grade Vehicles
+
+Resources: https://f1metrics.wordpress.com/2015/05/01/how-money-predicts-success-in-for
+mula-1/, https://www.eia.gov/environment/emissions/state/, https://www.fia.com/sites/default/files/2021_formula_1_technical_regulations_-_is
+s_7_-_2020-12-16.pdf, https://www.fia.com/sites/default/files/regulation/file/2013%20F1TECHNICAL%20REGULATIONS%20-%20PUBLISHED%20ON%2004.07.2013.pdf, https://www.fia.com/sites/default/files/2021_formula_1_sporting_regulations_-_iss_5_-_2020-12-16.pdf, https://www.fia.com/regulation/category/761, https://www.f1technical.net/articles/19, https://www.fueleconomy.gov/feg/pdfs/guides/FEG2021.pdf 
+
+URL:https://dannyli804.github.io/DataScience/
+"""
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 def CleanF1result():
     df=pd.read_csv('results.csv')
@@ -22,6 +34,11 @@ def mergeF1():
     
     newdf=pd.merge(df,df1,on='raceId',how='left')
     lastdf=pd.merge(newdf,df2,on='constructorId',how='left')
+    lastdf['year']=pd.to_numeric(lastdf['year'])
+    lastdf=lastdf[lastdf['year']>=1998]
+    lastdf=lastdf.sort_values(by=['year','position'])
+    lastdf['name']=lastdf['name'].apply(upperCaseName)
+    lastdf['name']=lastdf['name'].apply(cleanF1Name)
     lastdf.to_csv('finishingdata.csv',index=False)
 def nycgraphCO2Emission():
     df=pd.read_csv('newyorkCO2emission.csv')
@@ -79,7 +96,36 @@ def piechartCO2BySector():
     plt.title('Average CO2 Emission by Sector')
     plt.legend()
     plt.show()
+def upperCaseName(word):
+    word=word.upper()
+    return word   
+def cleanF1Name(word):
+    word=word.replace('ALPINE F1 TEAM','ALPINA')
+    word=word.replace('BMW SAUBER','BMW')
+    word=word.replace('RED BULL','HONDA')
+    word=word.replace('MCLAREN','MCLAREN AUTOMOTIVE')
+    word=word.replace('MERCEDES','MERCEDES-BENZ')
+    return word
+def cleanName(word):
     
+    word=word.replace('CHRYSLER GROUP LLC','CHRYSLER')
+    word=word.replace('GM','GENERAL MOTORS')
+    word=word.replace('GENERAL MOTORSC','GENERAL MOTORS')
+    word=word.replace('FORD MOTOR COMPANY','FORD')
+    word=word.replace('JAGUAR CARS','JAGUAR')
+    word=word.replace('JAGUAR LAND ROVER L','JAGUAR')
+    word=word.replace('MITSUBISHI MOTORS CO','MITSUBISHI')
+    word=word.replace('MITSUBISHI MOTORS NA','MITSUBISHI') 
+    word=word.replace('MCLAREN AUTOMOTIVE ','MCLAREN AUTOMOTIVE')  
+    word=word.replace('QUANTUM FUEL SYSTEM','QUANTUM') 
+    word=word.replace('SAAB CARS NORTH AMERICA','SAAB') 
+    word=word.replace('ROUSH PERFORMANCE','ROUSH') 
+    word=word.replace('SPYKR','SPYKER')
+    word=word.replace('SUBARU TECNICA INTE','SUBARU')
+    word=word.replace('VOLKSWAGEN GROUP OF','VOLKSWAGEN')
+    word=word.replace('VOLKSWAGENGROUPOF','VOLKSWAGEN')
+    word=word.replace('VW','VOLKSWAGEN')
+    return word
 def cleanMPG():
     count=2022
     while count>1997:
@@ -132,11 +178,113 @@ def cleanMPG():
             groupdf.to_csv(str(count)+'.csv',index=False)
             count=count-1
             #COMB MPG (GUIDE)
-    
-   
+def cleanColName():
+    count=2022
+    while count>1997:
+        df=pd.read_csv(str(count)+'.csv') 
+        if count>2009:   
+            df=df.rename(columns={'Comb FE (Guide) - Conventional Fuel':'COMB MPG'})
+            df=df.rename(columns={'Comb CO2 Rounded Adjusted (as shown on FE Label)':'COMB CO2'})
+        elif count<=2009 and count>2005:
+            df=df.rename(columns={'MFR':'Mfr Name'})
+            df=df.rename(columns={'COMB MPG (GUIDE)':'COMB MPG'})
+            
+        else:
+            df=df.rename(columns={'Manufacturer':'Mfr Name'})
+            df=df.rename(columns={'cmb':'COMB MPG'})
+        df.to_csv(str(count)+'.csv',index=False)
+        count=count-1
+def addingMPGcsv():
+    count=2022
+    while count>1998:
+        df=pd.read_csv('2022.csv')
+        df1=pd.read_csv(str(count-1)+'.csv')
+        df=pd.concat([df,df1])
+        df.to_csv('2022.csv',index=False)
+        count=count-1
+def cleanMfrName():
+    df=pd.read_csv('2022.csv')
+    df['Mfr Name']=df['Mfr Name'].apply(upperCaseName)
+    df['Mfr Name']=df['Mfr Name'].apply(cleanName)
+    df.to_csv('MPGConcat.csv',index=False)  
+def plotStanding():
 
-cleanMPG()
-#piechartCO2BySector()
-#nycgraphCO2Emission()
-#CleanF1result()()
+    df=pd.read_csv('finishingdata.csv')
+    dfnew=df.groupby(['year','name']).mean()
+    dfnew=dfnew.sort_values(['year','position']).groupby('year').head(5)
+    positions=[]
+    count=1
+    for i in range(len(dfnew.index)):
+        if count<5:
+            positions.append(count)
+            count+=1
+        else:
+            positions.append(count)
+            count=1
+    dfnew['position']=positions
+    dfnew=dfnew.reset_index()
+    
+    data=[]
+    #list1=dfnew['name'].unique()
+    for x in range(1,6,1):
+        dfposition=dfnew[dfnew['position']==x]
+        list1=dfposition['name'].tolist()
+        data.append(list1)
+    
+    val1 = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021] 
+    val2 = ['First','Second','Third','Fourth','Fifth'] 
+    val3 = data 
+
+    fig, ax = plt.subplots() 
+    ax.set_axis_off() 
+    table = ax.table( 
+        cellText = val3,
+        rowLabels = val2,
+        colLabels = val1, 
+        rowColours =["palegreen"] * len(val2),
+        colColours =["palegreen"] * len(val1), 
+        cellLoc ='center',
+        loc ='upper left'
+        )
+
+    ax.set_title('F1 Standings', 
+                fontweight ="bold") 
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(3,3)
+    plt.title('F1 Standings')
+    plt.show()
+"""  
+    for i in list1:
+        dfmfr=dfnew[dfnew['name']==i]
+        x=dfmfr['year'].tolist()
+        y=dfmfr['position'].tolist()
+        plt.scatter(x,y,label=i)
+        
+        
+        for j,k in zip(x,y):
+            if j%2==0:
+                plt.annotate(i,xy=(j,k),xytext=(j,k-.30),ha='center',arrowprops=dict(arrowstyle="->", color='black'))
+            else:
+                plt.annotate(i,xy=(j,k),xytext=(j,k-.15),ha='center',arrowprops=dict(arrowstyle="->", color='black'))
+            
+        
+    ax = plt.gca()
+    ax.set_ylim([6, 0])
+    plt.xticks([2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021])
+    plt.xticks(rotation=45)
+    plt.ylabel('Placement')
+    plt.xlabel('Year')
+    plt.show()
+"""
+    
+
+#CleanF1result()
 #mergeF1()
+#nycgraphCO2Emission()
+#piechartCO2BySector()
+#cleanMPG()
+#cleanColName()
+#addingMPGcsv()
+#cleanMfrName()
+plotStanding()
