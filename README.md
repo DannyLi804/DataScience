@@ -9,10 +9,10 @@ The main focus of my project is to see if advancements made in Formula 1 by diff
 The budget of each manufacturer has a direct correlation to success within Formula 1. The amount spent by the winning team is above the average budget cost per year, with one outlier in 2009. There is consistent data depicting a positive correlation between high budget and rate of success, thus concluding high budget equals success.
 
 #### This table shows the Placement of different Manufacturers in F1 by Year
-![graph](F1_Standings_Grid.png)
+<img src="https://raw.githubusercontent.com/DannyLi804/DataScience/main/F1_Standings_Grid.png" width=200% height=200%>
 
 #### This graph shows the CO2 Emissions in New York by Year.
-![graph](NYCO2Emission.png)![BudgetvsSuccess](https://user-images.githubusercontent.com/44373403/145338163-54f71f0d-c5b1-4b26-b591-78604f2238b8.png)
+![graph](NYCO2Emission.png)
 
 
 #### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
