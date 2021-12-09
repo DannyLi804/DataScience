@@ -7,22 +7,22 @@ Resources: https://f1metrics.wordpress.com/2015/05/01/how-money-predicts-success
 mula-1/, https://www.eia.gov/environment/emissions/state/, https://www.fia.com/sites/default/files/2021_formula_1_technical_regulations_-_is
 s_7_-_2020-12-16.pdf, https://www.fia.com/sites/default/files/regulation/file/2013%20F1TECHNICAL%20REGULATIONS%20-%20PUBLISHED%20ON%2004.07.2013.pdf, https://www.fia.com/sites/default/files/2021_formula_1_sporting_regulations_-_iss_5_-_2020-12-16.pdf, https://www.fia.com/regulation/category/761, https://www.f1technical.net/articles/19, https://www.fueleconomy.gov/feg/pdfs/guides/FEG2021.pdf, https://ergast.com/mrd/, https://www.fueleconomy.gov/feg/download.shtml 
 
-URL:https://dannyli804.github.io/DataScience/
+URL: https://dannyli804.github.io/DataScience/
 """
 import pandas as pd
 import matplotlib.pyplot as plt
-
-def CleanF1result():
-    df=pd.read_csv('results.csv')
+#all files are in https://github.com/DannyLi804/DataScience
+def CleanF1result():#opens up results.csv which is the result for every race in F1
+    df=pd.read_csv('results.csv')#we get only positions 1-5
     df1=df[df['position']=='1']
     df2=df[df['position']=='2']
     df3=df[df['position']=='3']
     df4=df[df['position']=='4']
     df5=df[df['position']=='5']
-    newdf=pd.concat([df1,df2,df3,df4,df5])
-    newdf=newdf.sort_values(by='resultId')
-    newdf.to_csv('result1-2.csv',index=False,columns=['resultId','raceId','constructorId','position'])
-def mergeF1():
+    newdf=pd.concat([df1,df2,df3,df4,df5])# concat the positions 1-5
+    newdf=newdf.sort_values(by='resultId')#sort by ID which is ascending based on year
+    newdf.to_csv('result1-2.csv',index=False,columns=['resultId','raceId','constructorId','position'])#save the new df that contains on positions 1-5
+def mergeF1():#used to combine constructorID with the name of the constructor and raceID with the year
     df=pd.read_csv('result1-2.csv')
     
     df1=pd.read_csv('races.csv')
@@ -31,15 +31,15 @@ def mergeF1():
     df2=pd.read_csv('constructors.csv')
     df2=df2[['constructorId','name']]
     
-    newdf=pd.merge(df,df1,on='raceId',how='left')
+    newdf=pd.merge(df,df1,on='raceId',how='left')#used merge to combine 2 dataframes
     lastdf=pd.merge(newdf,df2,on='constructorId',how='left')
-    lastdf['year']=pd.to_numeric(lastdf['year'])
-    lastdf=lastdf[lastdf['year']>=1998]
-    lastdf=lastdf.sort_values(by=['year','position'])
-    lastdf['name']=lastdf['name'].apply(upperCaseName)
-    lastdf['name']=lastdf['name'].apply(cleanF1Name)
+    lastdf['year']=pd.to_numeric(lastdf['year'])#change the year to a number
+    lastdf=lastdf[lastdf['year']>=1998]#filter for only 1998 and above for the year
+    lastdf=lastdf.sort_values(by=['year','position'])#sort the values by year and position, so it would be year position 1-5
+    lastdf['name']=lastdf['name'].apply(upperCaseName)#uppercase all the names
+    lastdf['name']=lastdf['name'].apply(cleanF1Name)#cleaning the names to be uniform with other data frame later
     lastdf.to_csv('finishingdata.csv',index=False)
-def nycgraphCO2Emission():
+def nycgraphCO2Emission():#created graph for total CO2 emission and CO2 emission from different fuel type data from newyorkCO2emission.csv
     df=pd.read_csv('newyorkCO2emission.csv')
     df=df[df['Sector']=='Fuel Totals']
     year=[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018]
@@ -57,7 +57,7 @@ def nycgraphCO2Emission():
     plt.ylabel('CO2 Emission(million metric tons)')
     plt.legend()
     plt.show()
-def piechartCO2BySector():
+def piechartCO2BySector():# created by piechart on different sectors and there CO2 emissions data from newyorkCO2emission.csv
     
     total=[224.2,207,196.9,179.2,183.9,188.5,191.6,202,209.5,214.5,208.2,200.5,199,194.2,192.2,197.8,200.5,204.9,203.4,205.2,211.7,205.9,200.3,211,213.3,209.6,191.1,197.7,187.8,172.1,185.7,175.7,168,170,177.8,175.6,171,166.9,175.9]
     transport=[71.7,67.2,60.1,54.2,49.3,58,59.2,62.5,59.7,59.9,63.8,62.3,60.8,61.7,60.6,62.4,65.7,65.6,66,66.5,66.9,66.7,68.4,73.2,74.9,73.2,74.2,73.6,73,71,82.6,77.3,75.6,76.4,80.9,79.1,82.3,82.9,83.3]
@@ -95,10 +95,10 @@ def piechartCO2BySector():
     plt.title('Average CO2 Emission by Sector')
     plt.legend()
     plt.show()
-def upperCaseName(word):
+def upperCaseName(word):#upper case the word and return it
     word=word.upper()
     return word   
-def cleanF1Name(word):
+def cleanF1Name(word):#help clean up the names of F1 teams to match with consumer grade manufacturers
     word=word.replace('ALPINE F1 TEAM','ALPINA')
     word=word.replace('BMW SAUBER','BMW')
     word=word.replace('RED BULL','HONDA')
@@ -106,7 +106,7 @@ def cleanF1Name(word):
     word=word.replace('MERCEDES','MERCEDES-BENZ')
     word=word.replace('LOTUS F1','LOTUS')
     return word
-def cleanName(word):
+def cleanName(word):#clean up consumer grade manufacturers names to help viszualize the data better
     
     word=word.replace('CHRYSLER GROUP LLC','CHRYSLER')
     word=word.replace('GM','GENERAL MOTORS')
@@ -126,16 +126,16 @@ def cleanName(word):
     word=word.replace('VOLKSWAGENGROUPOF','VOLKSWAGEN')
     word=word.replace('VW','VOLKSWAGEN')
     return word
-def cleanMPG():
+def cleanMPG():#data in MPG folder, used to open those files up and clean them up and save them into a csv file of the same name
     count=2022
-    while count>1997:
-        if count>2009:
+    while count>1997:# grouping the data and getting hte mean after grouping by name
+        if count>2009:#from 2010 and on, all extensions were .xlsx files and there are different column names that must be uniformed across 20 years
            
             df=pd.read_excel(str(count)+'.xlsx', index_col=0)
             
                 
             try:
-                groupdf=df.groupby(['Mfr Name']).mean()
+                groupdf=df.groupby(['Mfr Name']).mean()#grouping the data by the Mfr Name and giving the mean for the data under 3 columns
                 groupdf=groupdf.reset_index()
             except:
                 groupdf=df.groupby(['Mfr Name ']).mean()
@@ -148,7 +148,7 @@ def cleanMPG():
                 groupdf=groupdf[['Year','Mfr Name','Comb FE (Guide) - Conventional Fuel']]
             groupdf.to_csv(str(count)+'.csv',index=False)
             count=count-1
-        elif count==2008 or count<=2006 and count>=2003 or count<=1999:
+        elif count==2008 or count<=2006 and count>=2003 or count<=1999:#data was stored differently for 2007 and 2004 and 2005, they were not csv files 
             df=pd.read_csv(str(count)+'.csv',error_bad_lines=False)
             try:
                 groupdf=df.groupby(['MFR']).mean()
@@ -164,7 +164,7 @@ def cleanMPG():
             count=count-1    
         
         else:
-            df=pd.read_excel(str(count)+'.xls')
+            df=pd.read_excel(str(count)+'.xls')#other files are xls files so they had to get the proper extension and grouping
             try:
                 groupdf=df.groupby(['MFR']).mean()
             except:
@@ -178,7 +178,7 @@ def cleanMPG():
             groupdf.to_csv(str(count)+'.csv',index=False)
             count=count-1
             #COMB MPG (GUIDE)
-def cleanColName():
+def cleanColName():#renaming the columns of the csv files created by cleanMPG() so it would be uniform across all of the data, all those files are in CleanMPG folder
     count=2022
     while count>1997:
         df=pd.read_csv(str(count)+'.csv') 
@@ -194,10 +194,10 @@ def cleanColName():
             df=df.rename(columns={'cmb':'COMB MPG'})
         df.to_csv(str(count)+'.csv',index=False)
         count=count-1
-def roundMPG(num):
+def roundMPG(num):#round the MPG to 2 decimal places
     num=round(num,2)
     return num
-def addingMPGcsv():
+def addingMPGcsv():#adding all the data from all the csv files created by cleanMPG() and would have 2022.csv as the file with all the data concat into it 
     count=2022
     while count>1998:
         df=pd.read_csv('2022.csv')
@@ -205,38 +205,38 @@ def addingMPGcsv():
         df=pd.concat([df,df1])
         df.to_csv('2022.csv',index=False)
         count=count-1
-def cleanMfrName():
+def cleanMfrName():#cleaning up all the Mfr Name in the 2022.csv file and used function upperCaseName() and cleanName() and saving the file to MPGConcat.csv
     df=pd.read_csv('2022.csv')
     df['Mfr Name']=df['Mfr Name'].apply(upperCaseName)
     df['Mfr Name']=df['Mfr Name'].apply(cleanName)
     df.to_csv('MPGConcat.csv',index=False)  
-def plotStanding():
+def plotStanding():#creating the table labeled F1_Standings_Grid.png
 
-    df=pd.read_csv('finishingdata.csv')
+    df=pd.read_csv('finishingdata.csv')#taking the standing data and grouping the mean poisitions by year and name
     dfnew=df.groupby(['year','name']).mean()
-    dfnew=dfnew.sort_values(['year','position']).groupby('year').head(5)
+    dfnew=dfnew.sort_values(['year','position']).groupby('year').head(5)#onlying taking the top 5 position values of each year and sorting
     positions=[]
     count=1
-    for i in range(len(dfnew.index)):
+    for i in range(len(dfnew.index)):#giving positions 1-5 again to the sorted df 
         if count<5:
             positions.append(count)
             count+=1
         else:
             positions.append(count)
             count=1
-    dfnew['position']=positions
-    dfnew=dfnew.reset_index()
+    dfnew['position']=positions#adding the array to the position column
+    dfnew=dfnew.reset_index()#reseting index after grouping
     
     data=[]
-    #list1=dfnew['name'].unique()
-    for x in range(1,6,1):
+    
+    for x in range(1,6,1):#filtering the dataframe into another dataframe that only contains certain positions and appending it to a list to create a 2d list
         dfposition=dfnew[dfnew['position']==x]
         list1=dfposition['name'].tolist()
         data.append(list1)
     
-    val1 = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021] 
-    val2 = ['First','Second','Third','Fourth','Fifth'] 
-    val3 = data 
+    val1 = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021] #creating table column values
+    val2 = ['First','Second','Third','Fourth','Fifth'] #creating row values
+    val3 = data #inputting 2D array of data into cells of grid
 
     fig, ax = plt.subplots() 
     ax.set_axis_off() 
@@ -258,24 +258,24 @@ def plotStanding():
     plt.title('F1 Standings')
     plt.show()
     dfnew.to_csv('finishingdata.csv',index=False)
-def plotConsumer():    
+def plotConsumer():    #create line plot of manufacturers consumer-grade vehicles that also compete in F1, this is using consumer-grade vehicle data
     df=pd.read_csv('MPGConcat.csv')
-    df=df.groupby(['Year','Mfr Name']).mean()
-    df['COMB MPG']=df['COMB MPG'].apply(roundMPG)
-    df=df.reset_index()
+    df=df.groupby(['Year','Mfr Name']).mean()#cleaning up data and grouping by year
+    df['COMB MPG']=df['COMB MPG'].apply(roundMPG)#rounding MPG to 2 decimals
+    df=df.reset_index()#reseting index after grouping
     df1=pd.read_csv('finishingdata.csv')
-    list1=df1['name'].unique()
+    list1=df1['name'].unique()#getting unique manufacturers name in both F1 and consumer-grade cars
     list2=df['Mfr Name'].unique()
     list1_as_set=set(list1)
     intersection=list1_as_set.intersection(list2)
-    intersection_as_list=list(intersection)
-    df=df[df['Mfr Name'].isin(intersection_as_list)]
-    listname=df['Mfr Name'].unique()
+    intersection_as_list=list(intersection)#used to get names of manufacturers present in both F1 standings data and in consumer-grade vehicles data
+    df=df[df['Mfr Name'].isin(intersection_as_list)]#getting only the data for those manufacturers
+    listname=df['Mfr Name'].unique()#only getting the unique name of manufacturers present in the new dataframe
     for i in listname:
-        dfnew=df[df['Mfr Name']==i]
+        dfnew=df[df['Mfr Name']==i]#more filtering of data so we only get dataframe with a certain manufacturers name and we can list the data out to plot the points
         x=dfnew['Year'].tolist()
         y=dfnew['COMB MPG'].tolist()
-        plt.plot(x,y,label=i)
+        plt.plot(x,y,label=i)#plotting and labeling with manufacturers name
     plt.xticks([1998,1999,2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021,2022])
     plt.xticks(rotation=45)
     plt.title('MPG of Consumer-Grade Vehicles by F1 Manufacturers')
@@ -283,13 +283,15 @@ def plotConsumer():
     plt.ylabel('Miles Per Gallon(MPG)')
     plt.legend()
     plt.show()
-#CleanF1result()
-#mergeF1()
-#nycgraphCO2Emission()
-#piechartCO2BySector()
-#cleanMPG()
-#cleanColName()
-#addingMPGcsv()
-#cleanMfrName()
-#plotStanding()
-#plotConsumer()
+
+#if you start off with the files in MPG and files in F1 Standing CSV, the program will run and create the proper graphs
+CleanF1result()
+mergeF1()
+nycgraphCO2Emission()
+piechartCO2BySector()
+cleanMPG()
+cleanColName()
+addingMPGcsv()
+cleanMfrName()
+plotStanding()
+plotConsumer()
