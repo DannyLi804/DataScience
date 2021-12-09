@@ -105,6 +105,7 @@ def cleanF1Name(word):
     word=word.replace('RED BULL','HONDA')
     word=word.replace('MCLAREN','MCLAREN AUTOMOTIVE')
     word=word.replace('MERCEDES','MERCEDES-BENZ')
+    word=word.replace('LOTUS F1','LOTUS')
     return word
 def cleanName(word):
     
@@ -194,6 +195,9 @@ def cleanColName():
             df=df.rename(columns={'cmb':'COMB MPG'})
         df.to_csv(str(count)+'.csv',index=False)
         count=count-1
+def roundMPG(num):
+    num=round(num,2)
+    return num
 def addingMPGcsv():
     count=2022
     while count>1998:
@@ -254,31 +258,32 @@ def plotStanding():
     table.scale(3,3)
     plt.title('F1 Standings')
     plt.show()
-"""  
-    for i in list1:
-        dfmfr=dfnew[dfnew['name']==i]
-        x=dfmfr['year'].tolist()
-        y=dfmfr['position'].tolist()
-        plt.scatter(x,y,label=i)
-        
-        
-        for j,k in zip(x,y):
-            if j%2==0:
-                plt.annotate(i,xy=(j,k),xytext=(j,k-.30),ha='center',arrowprops=dict(arrowstyle="->", color='black'))
-            else:
-                plt.annotate(i,xy=(j,k),xytext=(j,k-.15),ha='center',arrowprops=dict(arrowstyle="->", color='black'))
-            
-        
-    ax = plt.gca()
-    ax.set_ylim([6, 0])
-    plt.xticks([2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021])
+    dfnew.to_csv('finishingdata.csv',index=False)
+def plotConsumer():    
+    df=pd.read_csv('MPGConcat.csv')
+    df=df.groupby(['Year','Mfr Name']).mean()
+    df['COMB MPG']=df['COMB MPG'].apply(roundMPG)
+    df=df.reset_index()
+    df1=pd.read_csv('finishingdata.csv')
+    list1=df1['name'].unique()
+    list2=df['Mfr Name'].unique()
+    list1_as_set=set(list1)
+    intersection=list1_as_set.intersection(list2)
+    intersection_as_list=list(intersection)
+    df=df[df['Mfr Name'].isin(intersection_as_list)]
+    listname=df['Mfr Name'].unique()
+    for i in listname:
+        dfnew=df[df['Mfr Name']==i]
+        x=dfnew['Year'].tolist()
+        y=dfnew['COMB MPG'].tolist()
+        plt.plot(x,y,label=i)
+    plt.xticks([1998,1999,2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,2021,2022])
     plt.xticks(rotation=45)
-    plt.ylabel('Placement')
-    plt.xlabel('Year')
+    plt.title('MPG of Consumer-Grade Vehicles by F1 Manufacturers')
+    plt.xlabel('Years')
+    plt.ylabel('Miles Per Gallon(MPG)')
+    plt.legend()
     plt.show()
-"""
-    
-
 #CleanF1result()
 #mergeF1()
 #nycgraphCO2Emission()
@@ -287,4 +292,5 @@ def plotStanding():
 #cleanColName()
 #addingMPGcsv()
 #cleanMfrName()
-plotStanding()
+#plotStanding()
+plotConsumer()
