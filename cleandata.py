@@ -11,7 +11,7 @@ URL:https://dannyli804.github.io/DataScience/
 """
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 def CleanF1result():
     df=pd.read_csv('results.csv')
@@ -293,4 +293,4 @@ def plotConsumer():
 #addingMPGcsv()
 #cleanMfrName()
 #plotStanding()
-plotConsumer()
+#plotConsumer()
