@@ -20,15 +20,21 @@ The mile per gallon(MPG) shows how far you can travel on 1 gallon of gas on aver
 F1 manufacturers, the fuel effciency of those vehicles can be said: the higher the MPG the better the fuel efficiency is and vice versa. The fuel efficiency of the majority of the manufacturers were steady climbing but during 2008, every manufacturer took a massive hit to there fuel efficiency, and even completely removing Alpina from the market, but ever since then, its been steady climbing once again. Higher MPG equals Higher Fuel Efficiency Equals Lower CO2 Emissions but...
 
 Thats not exactly the case.
+#### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
+![graph](AverageCO2EmissionsbySector.png)
+In New York, transportation accounts for over 35% of overall CO2 emissions for the last 40 years, it is the largest contributor to CO2 emission in New York on average.  
+
 #### This graph shows the CO2 Emissions in New York by Year.
 ![graph](NYCO2Emission.png)
-The overall CO2 emissions in New York has declined over the last 40 years but in the recent years we have seen a gradual increase in CO2 Emissions, both in the gas and petrol areas.
+The overall CO2 emissions in New York has declined over the last 40 years but in the recent years we have seen a gradual increase in CO2 emissions, both in the gas and petrol areas. Motor Vehicles being a top contributor to petrol CO2 emission.
 
 #### This graph shows the Percentage of each sector in New York contributing to the overall CO2 Emission by year.
 ![graph](CO2EmissionbySector.png)
+Even though petrol CO2 emissions has a miniscule increase in the recent years, transportation sector has almost doubled in the last 40 years. Why is it that fuel efficiency of consumer-grade cars increasing, and overall CO2 emissions decreasing in New York but transportation still accounting up to 50% of CO2 emission by sector?
 
-#### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
-![graph](AverageCO2EmissionsbySector.png)
+## Conclusion
+Formula 1 manufactures account for too small of a market that is the consumer-grade vehicles. The advances made in F1 do not have enough of an impact on consumer-grade vehicles to create enough change in the CO2 emissions in New York. The advances in F1 are too costly and simply not cost-effective enough for consumer-grade vehicle manufacturers to implement. 
+
 
 
 
