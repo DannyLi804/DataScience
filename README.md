@@ -16,8 +16,7 @@ The Standings for each year allows us to see individual manufacturers and there 
 
 #### This is a graph of MPG of consumer-grade vehicles made by manufactures that also compete in F1 and is ordered by year.
 ![graph](MPGConsumer.png)
-The mile per gallon(MPG) shows how far you can travel on 1 gallon of gas on average between city and highway. Based on the MPG of consumer-grade vehicles produced by competing  
-F1 manufacturers, the fuel effciency of those vehicles can be said: the higher the MPG the better the fuel efficiency is and vice versa. The fuel efficiency of the majority of the manufacturers were steady climbing but during 2008, every manufacturer took a massive hit to there fuel efficiency, and even completely removing Alpina from the market, but ever since then, its been steady climbing once again. Higher MPG equals Higher Fuel Efficiency Equals Lower CO2 Emissions but...
+The mile per gallon(MPG) shows how far you can travel on 1 gallon of gas on average between city and highway. Based on the MPG of consumer-grade vehicles produced by competing F1 manufacturers, the fuel effciency of those vehicles can be said: the higher the MPG the better the fuel efficiency is and vice versa. The fuel efficiency of the majority of the manufacturers were steady climbing but during 2008, every manufacturer took a massive hit to there fuel efficiency, and even completely removing Alpina from the market, but ever since then, its been steady climbing once again. Higher MPG equals Higher Fuel Efficiency Equals Lower CO2 Emissions but...
 
 Thats not exactly the case.
 #### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
