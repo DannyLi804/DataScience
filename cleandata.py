@@ -5,13 +5,12 @@ Title: Does F1 Research Trickle Down to Consumer-Grade Vehicles
 
 Resources: https://f1metrics.wordpress.com/2015/05/01/how-money-predicts-success-in-for
 mula-1/, https://www.eia.gov/environment/emissions/state/, https://www.fia.com/sites/default/files/2021_formula_1_technical_regulations_-_is
-s_7_-_2020-12-16.pdf, https://www.fia.com/sites/default/files/regulation/file/2013%20F1TECHNICAL%20REGULATIONS%20-%20PUBLISHED%20ON%2004.07.2013.pdf, https://www.fia.com/sites/default/files/2021_formula_1_sporting_regulations_-_iss_5_-_2020-12-16.pdf, https://www.fia.com/regulation/category/761, https://www.f1technical.net/articles/19, https://www.fueleconomy.gov/feg/pdfs/guides/FEG2021.pdf 
+s_7_-_2020-12-16.pdf, https://www.fia.com/sites/default/files/regulation/file/2013%20F1TECHNICAL%20REGULATIONS%20-%20PUBLISHED%20ON%2004.07.2013.pdf, https://www.fia.com/sites/default/files/2021_formula_1_sporting_regulations_-_iss_5_-_2020-12-16.pdf, https://www.fia.com/regulation/category/761, https://www.f1technical.net/articles/19, https://www.fueleconomy.gov/feg/pdfs/guides/FEG2021.pdf, https://ergast.com/mrd/, https://www.fueleconomy.gov/feg/download.shtml 
 
 URL:https://dannyli804.github.io/DataScience/
 """
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 def CleanF1result():
     df=pd.read_csv('results.csv')
