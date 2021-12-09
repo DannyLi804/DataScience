@@ -1,6 +1,8 @@
 ## Overview
 ![graph](F1pic.jpg)
-The main focus of my project is to see if advancements made in Formula 1 by different manufacturers are reflected in consumer-grade cars made by the same manufacturers. Our goal is to see if there is a correlation between Formula 1 budget cost to fuel efficieny in Formula 1 vehicles and show a trickle-down effect to consumer-grade motor vehicles fuel efficiency and the effect this has on CO2 emissions.
+Formula 1 is said to be the highest class of international racing for single-seater formula racing cars. F1 consist of the best drivers and the best vehicles this sport has to offer. In order for F1 vehicles to be consider the best, investors and manufacturers have to invest millions of dollars every year to achieve the best possible outcome in a formula race car. Along research, new innovations emerge and some of these innovations have a chance of being utilized in consumer-grade, mass-produced motor vehicles.
+The main focus of my project is to see if advancements made in Formula 1 by different manufacturers are reflected in consumer-grade cars made by the same manufacturers. Our goal is to see if there is a correlation between Formula 1 budget cost to fuel efficieny in Formula 1 vehicles and observe if there is a trickle-down effect on to consumer-grade motor vehicles fuel efficiency and the effect this has on CO2 emissions. 
+In order for us to see if F1 Research has an impact on Consumer-Grade motor vehicles, we have to examine the impact F1 research has on F1 Performance. Then we can see the standings for each year of F1 Racing and compare it to consumer-grade vehicles produced by the same manufacturers that compete in F1 and are placed within the top 5 for the year.
 ## Data
 #### This graph shows the budget spent by different manufacture from 1999-2014.
 ###### Green=winner
@@ -9,16 +11,24 @@ The main focus of my project is to see if advancements made in Formula 1 by diff
 The budget of each manufacturer has a direct correlation to success within Formula 1. The amount spent by the winning team is above the average budget cost per year, with one outlier in 2009. There is consistent data depicting a positive correlation between high budget and rate of success, thus concluding high budget equals success.
 
 #### This table shows the Placement of different Manufacturers in F1 by Year
-![graph](F1_Standings_Grid.png) 
-
-#### This graph shows the CO2 Emissions in New York by Year.
-![graph](NYCO2Emission.png)
+![graph](F1_Standings_Grid.png)
+The Standings for each year allows us to see individual manufacturers and there performance for the year. We can use this data to show the connection between F1 Research and spending, which allows us to connect it to the consumer-grade vehicles by manufacturer. We can also see household motor vehicle manufacturers such as Mercedes-Benz, Honda, Jaguar, Ferrari, Toyota, BMW and Mclaren.
 
 #### This is a graph of MPG of consumer-grade vehicles made by manufactures that also compete in F1 and is ordered by year.
 ![graph](MPGConsumer.png)
-#### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
-![graph](AverageCO2EmissionsbySector.png)
+The mile per gallon(MPG) shows how far you can travel on 1 gallon of gas on average between city and highway. Based on the MPG of consumer-grade vehicles produced by competing  
+F1 manufacturers, the fuel effciency of those vehicles can be said: the higher the MPG the better the fuel efficiency is and vice versa. The fuel efficiency of the majority of the manufacturers were steady climbing but during 2008, every manufacturer took a massive hit to there fuel efficiency, and even completely removing Alpina from the market, but ever since then, its been steady climbing once again. Higher MPG equals Higher Fuel Efficiency Equals Lower CO2 Emissions but...
+
+Thats not exactly the case.
+#### This graph shows the CO2 Emissions in New York by Year.
+![graph](NYCO2Emission.png)
+The overall CO2 emissions in New York has declined over the last 40 years but in the recent years we have seen a gradual increase in CO2 Emissions, both in the gas and petrol areas.
 
 #### This graph shows the Percentage of each sector in New York contributing to the overall CO2 Emission by year.
 ![graph](CO2EmissionbySector.png)
+
+#### This graph shows the Average CO2 Emissions by Sector in New York in the last 40 years.
+![graph](AverageCO2EmissionsbySector.png)
+
+
 
