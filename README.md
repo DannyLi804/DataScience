@@ -33,8 +33,19 @@ The overall CO2 emissions in New York has declined over the last 40 years but in
 Even though petrol CO2 emissions has a miniscule increase in the recent years, transportation sector has almost doubled in the last 40 years. Why is it that fuel efficiency of consumer-grade cars increasing, and overall CO2 emissions decreasing in New York but transportation still accounting up to 50% of CO2 emission by sector?
 
 ## Conclusion
-Formula 1 manufactures account for too small of a market that is the consumer-grade vehicles. The advances made in F1 do not have enough of an impact on consumer-grade vehicles to create enough change in the CO2 emissions in New York. The advances in F1 are too costly and simply not cost-effective enough for consumer-grade vehicle manufacturers to implement. 
+Formula 1 manufacturers account for too small of a market that is the consumer-grade vehicles. The advances made in F1 do not have enough of an impact on consumer-grade vehicles to create enough change in the CO2 emissions in New York. The advances in F1 are too costly and simply not cost-effective enough for consumer-grade vehicle manufacturers to implement. 
 
+## Technique
+The main technique I used in this project was just cleaning up data, most of the data was available but consistency of the data was a massive issue. Uniforming data from multiple sources, even the same source was difficult because of what data and how data was stored in the past. I would be cleaning the data as I progressed through the project and used alot of pd.merge, pd.concat, replace() and matplotlib.pyplot to clean and visualize all my data.  
 
+## Citation
+https://f1metrics.wordpress.com/2015/05/01/how-money-predicts-success-in-formula-1/
+https://www.eia.gov/environment/emissions/state/
+https://www.fia.com/sites/default/files/2021_formula_1_technical_regulations_-_iss_7_-_2020-12-16.pdf https://www.fia.com/sites/default/files/regulation/file/2013%20F1TECHNICAL%20REGULATIONS%20-%20PUBLISHED%20ON%2004.07.2013.pdf https://www.fia.com/sites/default/files/2021_formula_1_sporting_regulations_-_iss_5_-_2020-12-16.pdf
+https://www.fia.com/regulation/category/761
+https://www.f1technical.net/articles/19
+https://www.fueleconomy.gov/feg/pdfs/guides/FEG2021.pdf 
+https://ergast.com/mrd/
+https://www.fueleconomy.gov/feg/download.shtml
 
 
